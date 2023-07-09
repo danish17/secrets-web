@@ -10,3 +10,8 @@ export interface ISecretCreation {
   secret: string;
   id: number;
 }
+
+export interface IResponse {
+  message: string;
+  status: number;
+}
