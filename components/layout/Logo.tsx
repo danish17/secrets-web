@@ -6,7 +6,7 @@ const Logo = (props: Omit<ImageProps, "src">) => {
   const { alt, ...rest } = props;
   return (
     <Image
-      src={colorMode === "dark" ? "./logo-dark.svg" : "./logo.svg"}
+      src={colorMode === "dark" ? "/logo-dark.svg" : "/logo.svg"}
       alt={props.alt ?? ""}
       {...rest}
     />
