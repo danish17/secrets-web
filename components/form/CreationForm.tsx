@@ -54,7 +54,7 @@ const CreationForm = () => {
       try {
         const { data } = await axios({
           method: "post",
-          url: process.env.NEXT_PUBLIC_API_BASEURL + "/secret" ?? "",
+          url: process.env.NEXT_PUBLIC_API_BASEURL + "/secret/create" ?? "",
           data: values,
         });
 
@@ -226,7 +226,7 @@ const CreationForm = () => {
             colorScheme="blue"
             onClick={() => {
               navigator?.clipboard?.writeText(
-                `${process.env.NEXT_PUBLIC_API_BASEURL}/secret/${data?.uri}`
+                `${window.location.origin}/secret/${data?.uri}`
               );
               toast({
                 title: "Secret link copied.",
