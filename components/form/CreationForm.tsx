@@ -5,7 +5,6 @@ import {
   Flex,
   FormControl,
   FormErrorMessage,
-  FormHelperText,
   FormLabel,
   HStack,
   IconButton,
@@ -15,14 +14,32 @@ import {
   Spacer,
   Text,
   Textarea,
+  useToast,
 } from "@chakra-ui/react";
-import { BsEye, BsEyeSlash, BsShieldFillCheck } from "react-icons/bs";
-import { useState } from "react";
+import {
+  BsArrowRight,
+  BsClipboard,
+  BsEye,
+  BsEyeSlash,
+  BsShieldFillCheck,
+} from "react-icons/bs";
+import { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import { FiMinus, FiPlus } from "react-icons/fi";
+import axios from "axios";
+
 import { formValidationSchema } from "../../schema/formSchema";
+import { ISecretCreation } from "../../interfaces/data";
 
 const CreationForm = () => {
+  const [viewPwd, setViewPwd] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [data, setData] = useState<ISecretCreation | null>(null);
+
+  const toast = useToast();
+
   const formik = useFormik({
     initialValues: {
       secret: "",
@@ -31,12 +48,41 @@ const CreationForm = () => {
       validFor: 1,
     },
     validationSchema: formValidationSchema,
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+    onSubmit: async (values, { resetForm }) => {
+      setIsLoading(true);
+
+      try {
+        const { data } = await axios({
+          method: "post",
+          url: process.env.NEXT_PUBLIC_API_BASEURL + "/secret" ?? "",
+          data: values,
+        });
+
+        setData(data);
+        setIsSuccess(true);
+        toast({
+          title: "Secret created successfully.",
+          status: "success",
+          duration: 2500,
+          isClosable: true,
+          position: "bottom-right",
+        });
+      } catch {
+        setIsError(true);
+        toast({
+          title: "Secret creation failed.",
+          description: "There was an error while creating the secret",
+          status: "error",
+          duration: 2500,
+          isClosable: true,
+          position: "bottom-right",
+        });
+      }
+
+      setIsLoading(false);
+      resetForm();
     },
   });
-
-  const [viewPwd, setViewPwd] = useState(false);
 
   return (
     <Flex flexDir="column" alignItems="center" gap={4} padding={0} width="full">
@@ -62,13 +108,14 @@ const CreationForm = () => {
           </Text>
           <Flex flexDir="column" alignItems="center" gap={2}>
             <FormControl isInvalid={!!formik.errors?.passphrase}>
-              <FormLabel textAlign="center">enter a passphrase</FormLabel>
+              <FormLabel textAlign="center">enter a passphrase *</FormLabel>
               <InputGroup>
                 <Input
                   id="passphrase"
                   name="passphrase"
                   onChange={formik.handleChange}
                   value={formik.values.passphrase}
+                  placeholder="*_* super secret *_*"
                   isRequired
                   type={viewPwd ? "text" : "password"}
                   autoComplete="off"
@@ -77,13 +124,14 @@ const CreationForm = () => {
                   <IconButton
                     icon={viewPwd ? <BsEyeSlash /> : <BsEye />}
                     aria-label="View passphrase"
+                    variant="ghost"
                     onClick={() => setViewPwd(!viewPwd)}
                   />
                 </InputRightElement>
               </InputGroup>
-              <FormHelperText>
-                choose a strong passphrase (4-36 characters)
-              </FormHelperText>
+              {!!formik.errors?.passphrase && (
+                <FormErrorMessage>{formik.errors.passphrase}</FormErrorMessage>
+              )}
             </FormControl>
             <FormControl></FormControl>
           </Flex>
@@ -150,11 +198,47 @@ const CreationForm = () => {
         </Flex>
         <Spacer mt={8} />
         <Center>
-          <Button type="submit" rightIcon={<BsShieldFillCheck />}>
-            create secret
+          <Button
+            isLoading={isLoading}
+            colorScheme={isSuccess ? "green" : "gray"}
+            onClick={formik.submitForm}
+            rightIcon={isSuccess ? <BsShieldFillCheck /> : <BsArrowRight />}
+          >
+            {isSuccess ? "secret created" : "create secret"}
           </Button>
         </Center>
       </form>
+      {isSuccess && (
+        <HStack>
+          <Input
+            value={`${
+              process.env.NEXT_PUBLIC_API_BASEURL?.split("//")[1]
+            }/secret/${data?.uri}`}
+            isReadOnly
+            variant="filled"
+            width="full"
+            size="sm"
+            cursor="pointer"
+          />
+          <IconButton
+            aria-label="Copy Secret URL"
+            icon={<BsClipboard />}
+            colorScheme="blue"
+            onClick={() => {
+              navigator?.clipboard?.writeText(
+                `${process.env.NEXT_PUBLIC_API_BASEURL}/secret/${data?.uri}`
+              );
+              toast({
+                title: "Secret link copied.",
+                status: "success",
+                duration: 2500,
+                isClosable: true,
+                position: "bottom-right",
+              });
+            }}
+          />
+        </HStack>
+      )}
     </Flex>
   );
 };
