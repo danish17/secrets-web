@@ -1,10 +1,11 @@
 import Head from "next/head";
-import { FiArrowRight, FiFileText } from "react-icons/fi";
+import { FiFileText } from "react-icons/fi";
 import { Button, Flex, Heading, Spacer, Text } from "@chakra-ui/react";
 import { Main } from "../../components/layout/Main";
 import { Footer } from "../../components/layout/Footer";
-import Image from "next/image";
 import { useRouter } from "next/router";
+import Logo from "../../components/layout/Logo";
+import { BsArrowRight } from "react-icons/bs";
 
 const Home = () => {
   const router = useRouter();
@@ -18,11 +19,10 @@ const Home = () => {
       <Flex direction="column" flex="1">
         <Main>
           <Flex alignItems="center" flexDir="column" gap={2}>
-            <Image
-              src="./logo.svg"
-              alt="Secrets - Create and share n-time viewable secret messages."
-              height={150}
-              width={150}
+            <Logo
+              alt="Secret - Create and share n-time viewable secret messages."
+              height={140}
+              width={140}
             />
             <Heading textTransform="lowercase">Secrets</Heading>
             <Text textTransform="lowercase" textAlign="center">
@@ -36,7 +36,7 @@ const Home = () => {
               }}
             />
             <Button
-              rightIcon={<FiArrowRight />}
+              rightIcon={<BsArrowRight />}
               onClick={() => router.push("/create")}
             >
               create secret
