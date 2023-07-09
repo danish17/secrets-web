@@ -1,4 +1,5 @@
 import { Container, Flex, FlexProps } from "@chakra-ui/react";
+import { motion } from "framer-motion";
 
 export const Main = (props: FlexProps) => {
   const { children } = props;
@@ -10,6 +11,13 @@ export const Main = (props: FlexProps) => {
         flexDir="column"
         alignItems="center"
         justifyContent="center"
+        as={motion.div}
+        initial={{
+          opacity: 0,
+        }}
+        animate={{
+          opacity: 1,
+        }}
       >
         {children}
       </Container>
