@@ -13,14 +13,24 @@ export const Footer = () => (
     <Stack spacing={{ base: "4", md: "5" }} justify="center">
       <Stack justify="center" direction="row" align="center">
         <ButtonGroup variant="ghost">
-          <IconButton as="a" href="#" aria-label="Website" icon={<FaLink />} />
           <IconButton
             as="a"
-            href="#"
+            href="https://linkedin.com/in/danishshakeel"
+            aria-label="Website"
+            icon={<FaLink />}
+          />
+          <IconButton
+            as="a"
+            href="https://linkedin.com/in/danishshakeel"
             aria-label="LinkedIn"
             icon={<FaLinkedin />}
           />
-          <IconButton as="a" href="#" aria-label="GitHub" icon={<FaGithub />} />
+          <IconButton
+            as="a"
+            href="https://github.com/secrets"
+            aria-label="GitHub"
+            icon={<FaGithub />}
+          />
         </ButtonGroup>
       </Stack>
       <Text fontSize="sm" color="fg.subtle" textAlign="center">
