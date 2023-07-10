@@ -13,22 +13,12 @@ const CreateSecretPage = () => {
         <meta name="description" content="Share n-time viewable secrets" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
-      <Flex direction="column" flex="1">
-        <Main>
-          <Flex alignItems="center" flexDir="column" gap={2}>
-            <Logo alt="" height={60} width={60} />
-            <Spacer my={4} />
-            <Flex
-              flexDir={{
-                sm: "column",
-                md: "row",
-              }}
-            />
-            <CreationForm />
-          </Flex>
-        </Main>
-        <Footer />
-      </Flex>
+      <Main>
+        <Logo alt="" height={60} width={60} />
+        <Spacer my={4} />
+        <CreationForm />
+      </Main>
+      <Footer />
     </>
   );
 };

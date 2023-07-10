@@ -16,6 +16,7 @@ import {
   Textarea,
   useToast,
 } from "@chakra-ui/react";
+
 import {
   BsArrowRight,
   BsClipboard,
@@ -23,9 +24,10 @@ import {
   BsEyeSlash,
   BsShieldFillCheck,
 } from "react-icons/bs";
+import { FiMinus, FiPlus } from "react-icons/fi";
+
 import { useState } from "react";
 import { useFormik } from "formik";
-import { FiMinus, FiPlus } from "react-icons/fi";
 import axios from "axios";
 
 import { formValidationSchema } from "../../schema/formSchema";
@@ -85,8 +87,8 @@ const CreationForm = () => {
   });
 
   return (
-    <Flex flexDir="column" alignItems="center" gap={4} padding={0}>
-      <form onSubmit={formik.handleSubmit}>
+    <Flex flexDir="column" alignItems="center" gap={4} padding={0} w="full">
+      <form onSubmit={formik.handleSubmit} style={{ width: "100%" }}>
         <FormControl isInvalid={!!formik.errors?.secret}>
           <Textarea
             id="secret"
@@ -209,13 +211,12 @@ const CreationForm = () => {
         </Center>
       </form>
       {isSuccess && (
-        <HStack>
+        <HStack w="full">
           <Input
             value={`${window.location.origin}/secret/${data?.uri}`}
             isReadOnly
             variant="filled"
             width="full"
-            size="sm"
             cursor="pointer"
           />
           <IconButton

@@ -80,8 +80,8 @@ const SingleSecret = () => {
       <Main>
         <Logo
           alt="Secret - Create and share n-time viewable secret messages."
-          height={140}
-          width={140}
+          height={60}
+          width={60}
         />
         <Spacer my={4} />
         {isLoading && <Spinner size="lg" />}
