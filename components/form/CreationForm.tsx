@@ -23,7 +23,7 @@ import {
   BsEyeSlash,
   BsShieldFillCheck,
 } from "react-icons/bs";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useFormik } from "formik";
 import { FiMinus, FiPlus } from "react-icons/fi";
 import axios from "axios";
@@ -85,7 +85,16 @@ const CreationForm = () => {
   });
 
   return (
-    <Flex flexDir="column" alignItems="center" gap={4} padding={0} width="full">
+    <Flex
+      flexDir="column"
+      alignItems="center"
+      gap={4}
+      padding={0}
+      minW={{
+        sm: "full",
+        md: "400px",
+      }}
+    >
       <form onSubmit={formik.handleSubmit}>
         <FormControl isInvalid={!!formik.errors?.secret}>
           <Textarea
