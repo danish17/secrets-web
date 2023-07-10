@@ -1,4 +1,4 @@
-import { Button, Flex, Heading, Spacer } from "@chakra-ui/react";
+import { Button, Flex, Heading, Spacer, Spinner } from "@chakra-ui/react";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -17,6 +17,9 @@ const SingleSecret = () => {
     null
   );
   const [secretState, setSecretState] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
   useEffect(() => {
     async function fetchData() {
@@ -28,12 +31,14 @@ const SingleSecret = () => {
           });
 
           if (!!response) {
-            console.log(response);
             setSecret(response?.data as unknown as ISecretCreation | IResponse);
+            setIsSuccess(true);
           }
         } catch (error) {
+          setIsError(true);
           console.error(error);
         }
+        setIsLoading(false);
       }
     }
 
@@ -74,19 +79,22 @@ const SingleSecret = () => {
       </Head>
       <Flex direction="column" flex="1">
         <Main>
-          <Flex alignItems="center" flexDir="column" gap={2}>
-            <Logo
-              alt="Secret - Create and share n-time viewable secret messages."
-              height={140}
-              width={140}
-            />
-            <Spacer my={4} />
-            {secretState === "success" ? (
-              <SecretDetails secret={secret as ISecretCreation} />
-            ) : (
-              <SecretState state={secretState} />
-            )}
-          </Flex>
+          <Logo
+            alt="Secret - Create and share n-time viewable secret messages."
+            height={140}
+            width={140}
+          />
+          <Spacer my={4} />
+          {isLoading && <Spinner />}
+          {isSuccess && (
+            <>
+              {secretState === "success" ? (
+                <SecretDetails secret={secret as ISecretCreation} />
+              ) : (
+                <SecretState state={secretState} />
+              )}
+            </>
+          )}
         </Main>
         <Footer />
       </Flex>
