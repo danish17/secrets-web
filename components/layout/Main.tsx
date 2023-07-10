@@ -12,6 +12,7 @@ export const Main = (props: FlexProps) => {
         alignItems="center"
         justifyContent="center"
         as={motion.div}
+        w={{ sm: "full", md: "66%", lg: "50%" }}
         initial={{
           opacity: 0,
         }}

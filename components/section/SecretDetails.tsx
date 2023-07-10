@@ -10,25 +10,27 @@ import {
   Spacer,
   Text,
   Textarea,
-  VStack,
   useToast,
 } from "@chakra-ui/react";
+
 import {
   MdOutlineHourglassBottom,
   MdOutlineMoreTime,
   MdOutlineRemoveRedEye,
 } from "react-icons/md";
-import moment from "moment";
-import { IResponse, ISecretCreation } from "../../interfaces/data";
-import { useEffect, useState } from "react";
-import { useFormik } from "formik";
 import {
   BsEye,
   BsEyeSlash,
   BsShieldFillCheck,
   BsShieldLockFill,
 } from "react-icons/bs";
+
 import axios from "axios";
+import moment from "moment";
+import { useEffect, useState } from "react";
+import { useFormik } from "formik";
+
+import { IResponse, ISecretCreation } from "../../interfaces/data";
 
 const SecretDetails = (props: { secret: ISecretCreation }) => {
   const { createdAt, expiresAt, secret, viewsLeft, id } = props.secret;
@@ -108,7 +110,7 @@ const SecretDetails = (props: { secret: ISecretCreation }) => {
     },
   });
   return (
-    <Flex flexDir="column" alignItems="center" gap={4} padding={0}>
+    <Flex flexDir="column" alignItems="center" gap={4} padding={0} w="full">
       <Textarea
         value={secretContent}
         isReadOnly
@@ -124,7 +126,7 @@ const SecretDetails = (props: { secret: ISecretCreation }) => {
           });
         }}
       />
-      <form onSubmit={formik.handleSubmit}>
+      <form onSubmit={formik.handleSubmit} style={{ width: "100%" }}>
         <InputGroup>
           <Input
             id="passphrase"
@@ -160,7 +162,7 @@ const SecretDetails = (props: { secret: ISecretCreation }) => {
       </form>
       <Divider my={4} />
       <Text color="gray.300">secret details</Text>
-      <VStack>
+      <Flex flexDir="column" alignItems="center">
         <Button
           width="full"
           leftIcon={<MdOutlineMoreTime />}
@@ -185,7 +187,7 @@ const SecretDetails = (props: { secret: ISecretCreation }) => {
         >
           {viewsLeft} views left
         </Button>
-      </VStack>
+      </Flex>
     </Flex>
   );
 };

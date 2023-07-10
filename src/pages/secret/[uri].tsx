@@ -77,27 +77,25 @@ const SingleSecret = () => {
         <meta name="description" content="Share n-time viewable secrets" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
-      <Flex direction="column" flex="1">
-        <Main>
-          <Logo
-            alt="Secret - Create and share n-time viewable secret messages."
-            height={140}
-            width={140}
-          />
-          <Spacer my={4} />
-          {isLoading && <Spinner />}
-          {isSuccess && (
-            <>
-              {secretState === "success" ? (
-                <SecretDetails secret={secret as ISecretCreation} />
-              ) : (
-                <SecretState state={secretState} />
-              )}
-            </>
-          )}
-        </Main>
-        <Footer />
-      </Flex>
+      <Main>
+        <Logo
+          alt="Secret - Create and share n-time viewable secret messages."
+          height={140}
+          width={140}
+        />
+        <Spacer my={4} />
+        {isLoading && <Spinner size="lg" />}
+        {isSuccess && (
+          <>
+            {secretState === "success" ? (
+              <SecretDetails secret={secret as ISecretCreation} />
+            ) : (
+              <SecretState state={secretState} />
+            )}
+          </>
+        )}
+      </Main>
+      <Footer />
     </>
   );
 };
