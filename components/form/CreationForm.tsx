@@ -85,16 +85,7 @@ const CreationForm = () => {
   });
 
   return (
-    <Flex
-      flexDir="column"
-      alignItems="center"
-      gap={4}
-      padding={0}
-      minW={{
-        sm: "full",
-        md: "400px",
-      }}
-    >
+    <Flex flexDir="column" alignItems="center" gap={4} padding={0}>
       <form onSubmit={formik.handleSubmit}>
         <FormControl isInvalid={!!formik.errors?.secret}>
           <Textarea
@@ -220,9 +211,7 @@ const CreationForm = () => {
       {isSuccess && (
         <HStack>
           <Input
-            value={`${
-              process.env.NEXT_PUBLIC_API_BASEURL?.split("//")[1]
-            }/secret/${data?.uri}`}
+            value={`${window.location.origin}/secret/${data?.uri}`}
             isReadOnly
             variant="filled"
             width="full"

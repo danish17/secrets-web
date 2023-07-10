@@ -39,7 +39,12 @@ const SecretState = (props: { state: string }) => {
       gap={8}
       padding={8}
     >
-      <Image alt="" src={states[state]?.image} height={60} width={60} />
+      <Image
+        alt=""
+        src={states[state]?.image ?? "logo.svg"}
+        height={60}
+        width={60}
+      />
       <Heading as="p" size="md">
         {states[state]?.message}
       </Heading>
