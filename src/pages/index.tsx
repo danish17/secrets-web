@@ -34,7 +34,6 @@ const Home = () => {
           >
             create secret
           </Button>
-          <Spacer my={2} />
           <Button variant="outline" rightIcon={<FiFileText />}>
             docs
           </Button>
