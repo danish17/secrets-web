@@ -16,38 +16,31 @@ const Home = () => {
         <meta name="description" content="Share n-time viewable secrets" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
-      <Flex direction="column" flex="1">
-        <Main>
-          <Flex alignItems="center" flexDir="column" gap={2}>
-            <Logo
-              alt="Secret - Create and share n-time viewable secret messages."
-              height={140}
-              width={140}
-            />
-            <Heading textTransform="lowercase">Secrets</Heading>
-            <Text textTransform="lowercase" textAlign="center">
-              Create and share n-time viewable secret messages.
-            </Text>
-            <Spacer my={4} />
-            <Flex
-              flexDir={{
-                sm: "column",
-                md: "row",
-              }}
-            />
-            <Button
-              rightIcon={<BsArrowRight />}
-              onClick={() => router.push("/create")}
-            >
-              create secret
-            </Button>
-            <Button variant="outline" rightIcon={<FiFileText />}>
-              docs
-            </Button>
-          </Flex>
-        </Main>
-        <Footer />
-      </Flex>
+      <Main>
+        <Logo
+          alt="Secret - Create and share n-time viewable secret messages."
+          height={140}
+          width={140}
+        />
+        <Flex flexDir="column" gap={2} alignItems="center">
+          <Heading textTransform="lowercase">Secrets</Heading>
+          <Text textTransform="lowercase" textAlign="center">
+            Create and share n-time viewable secret messages
+          </Text>
+          <Spacer my={4} />
+          <Button
+            rightIcon={<BsArrowRight />}
+            onClick={() => router.push("/create")}
+          >
+            create secret
+          </Button>
+          <Spacer my={2} />
+          <Button variant="outline" rightIcon={<FiFileText />}>
+            docs
+          </Button>
+        </Flex>
+      </Main>
+      <Footer />
     </>
   );
 };
