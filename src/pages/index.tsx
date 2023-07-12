@@ -34,7 +34,13 @@ const Home = () => {
           >
             create secret
           </Button>
-          <Button variant="outline" rightIcon={<FiFileText />}>
+          <Button
+            as="a"
+            href="https://github.com/danish17/secrets"
+            rel="noopener noreferrer"
+            variant="outline"
+            rightIcon={<FiFileText />}
+          >
             docs
           </Button>
         </Flex>
