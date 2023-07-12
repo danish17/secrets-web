@@ -32,7 +32,7 @@ export const Footer = () => {
             />
             <IconButton
               as="a"
-              href="https://github.com/secrets"
+              href="https://github.com/danish17/secrets"
               aria-label="GitHub"
               icon={<FaGithub />}
             />
