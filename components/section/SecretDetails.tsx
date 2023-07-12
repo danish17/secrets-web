@@ -185,7 +185,7 @@ const SecretDetails = (props: { secret: ISecretCreation }) => {
           variant="ghost"
           fontWeight="normal"
         >
-          {viewsLeft} views left
+          {isSuccess ? viewsLeft - 1 : viewsLeft} views left
         </Button>
       </Flex>
     </Flex>
