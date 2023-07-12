@@ -46,6 +46,7 @@ const CreationForm = () => {
     initialValues: {
       secret: "",
       passphrase: "",
+      confirmPassphrase: "",
       viewsAllowed: 1,
       validFor: 1,
     },
@@ -99,9 +100,7 @@ const CreationForm = () => {
             placeholder="write your secret message here..."
             borderRadius="md"
           />
-          {!!formik.errors?.secret && (
-            <FormErrorMessage>{formik.errors.secret}</FormErrorMessage>
-          )}
+          <FormErrorMessage>{formik.errors.secret}</FormErrorMessage>
         </FormControl>
         <Divider my={4} />
         <Flex flexDir="column" gap={4}>
@@ -131,11 +130,25 @@ const CreationForm = () => {
                   />
                 </InputRightElement>
               </InputGroup>
-              {!!formik.errors?.passphrase && (
-                <FormErrorMessage>{formik.errors.passphrase}</FormErrorMessage>
-              )}
+              <FormErrorMessage>{formik.errors.passphrase}</FormErrorMessage>
             </FormControl>
-            <FormControl></FormControl>
+            <FormControl isInvalid={!!formik.errors?.confirmPassphrase}>
+              <FormLabel textAlign="center">confirm passphrase</FormLabel>
+              <InputGroup>
+                <Input
+                  id="confirmPassphrase"
+                  name="confirmPassphrase"
+                  onChange={formik.handleChange}
+                  value={formik.values.confirmPassphrase}
+                  isRequired
+                  type="password"
+                  autoComplete="off"
+                />
+              </InputGroup>
+              <FormErrorMessage>
+                {formik.errors.confirmPassphrase}
+              </FormErrorMessage>
+            </FormControl>
           </Flex>
           <Flex flexDir="column" alignItems="center" gap={2}>
             <Text textAlign="center">
@@ -203,6 +216,7 @@ const CreationForm = () => {
           <Button
             isLoading={isLoading}
             colorScheme={isSuccess ? "green" : "gray"}
+            isDisabled={!formik.isValid}
             onClick={formik.submitForm}
             rightIcon={isSuccess ? <BsShieldFillCheck /> : <BsArrowRight />}
           >

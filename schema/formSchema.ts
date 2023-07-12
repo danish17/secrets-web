@@ -8,6 +8,10 @@ export const formValidationSchema = Yup.object().shape({
     .min(4, "passphrase is too short.")
     .max(32, "passphrase cannot be longer than 32 characters")
     .required("passphrase cannot be empty :/"),
+  confirmPassphrase: Yup.string().oneOf(
+    [Yup.ref("passphrase")],
+    "Passphrases must match."
+  ),
   viewsAllowed: Yup.number().min(1).max(12).required(),
   validFor: Yup.number().min(1).max(24).required(),
 });
