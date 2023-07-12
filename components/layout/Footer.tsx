@@ -20,7 +20,7 @@ export const Footer = () => {
           <ButtonGroup variant="ghost">
             <IconButton
               as="a"
-              href="https://linkedin.com/in/danishshakeel"
+              href="https://iamdani.sh"
               aria-label="Website"
               icon={<FaLink />}
             />
