@@ -1,14 +1,39 @@
 import Head from "next/head";
 import { FiFileText } from "react-icons/fi";
-import { Button, Flex, Heading, Spacer, Text } from "@chakra-ui/react";
+import {
+  Button,
+  Divider,
+  Flex,
+  HStack,
+  Heading,
+  IconButton,
+  Input,
+  InputGroup,
+  InputRightElement,
+  Spacer,
+  Text,
+} from "@chakra-ui/react";
 import { Main } from "../../components/layout/Main";
 import { Footer } from "../../components/layout/Footer";
 import { useRouter } from "next/router";
 import Logo from "../../components/layout/Logo";
 import { BsArrowRight } from "react-icons/bs";
+import { useEffect, useState } from "react";
 
 const Home = () => {
   const router = useRouter();
+  const [secretUrl, setSecretUrl] = useState("");
+  const [isValid, setIsValid] = useState(false);
+
+  useEffect(() => {
+    if (!(secretUrl && secretUrl.length === 7)) {
+      setIsValid(false);
+      return;
+    }
+
+    setIsValid(true);
+  }, [secretUrl]);
+
   return (
     <>
       <Head>
@@ -43,6 +68,31 @@ const Home = () => {
           >
             docs
           </Button>
+          <HStack gap={2} w="full">
+            <Divider />
+            <Text fontSize="sm" color="gray.500">
+              or
+            </Text>
+            <Divider />
+            <Text></Text>
+          </HStack>
+          <Text fontSize="sm">enter the 7 character secret id</Text>
+          <HStack>
+            <Input
+              variant="filled"
+              onChange={(e) => {
+                setSecretUrl(e.target.value);
+              }}
+            />
+            <Button
+              aria-label="View secret"
+              fontSize="sm"
+              isDisabled={!isValid}
+              onClick={() => router.push(`/secret/${secretUrl}`)}
+            >
+              view
+            </Button>
+          </HStack>
         </Flex>
       </Main>
       <Footer />
