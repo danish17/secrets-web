@@ -21,7 +21,7 @@
     "formik": "^2.4.2",
     "framer-motion": "^10.12.18",
     "moment": "^2.29.4",
-    "next": "13.4.9",
+    "next": "14.1.1",
     "next-pwa": "^5.6.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
