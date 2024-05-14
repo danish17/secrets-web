@@ -39,7 +39,7 @@ export const Footer = () => {
           </ButtonGroup>
         </Stack>
         <Text fontSize="sm" color="fg.subtle" textAlign="center">
-          created with 💛 by{" "}
+          created with 🩷 by{" "}
           <Link href="https://iamdani.sh" isExternal>
             danish shakeel
           </Link>
